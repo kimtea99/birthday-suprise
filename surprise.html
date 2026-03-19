@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(to right, #080808, #000000);
+  font-family: 'Georgia', serif;
+  overflow: hidden;
+}
+
+/* Envelope Body */
+.envelope{
+  position:relative;
+  width:320px;
+  height:200px;
+  cursor:pointer;
+}
+
+/* Bottom Rectangle */
+.base{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ff6f91;
+  border-radius:6px;
+}
+
+/* Triangle Flap */
+.flap{
+  position:absolute;
+  top:0;
+  width:0;
+  height:0;
+  border-left:160px solid transparent;
+  border-right:160px solid transparent;
+  border-top:100px solid #ff4d6d;
+  transform-origin:top;
+  transition:0.6s;
+}
+
+/* Floating text */
+.floatText{
+  position:fixed;
+  animation: floatup 5s linear infinite;
+  font-size:14px;
+  font-weight:bold;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 1000;
+}
+@keyframes floatup {
+    0%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+
+}
+
+/* Letter */
+.letter{
+  position:absolute;
+  width:600px;
+  height:350px;
+  background:rgb(252, 251, 251);
+  top:15px;
+  left:20px;
+  border-radius:6px;
+  padding:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  transform:translateY(40px);
+  opacity:0;
+  transition:0.6s;
+}
+
+/* Open Animation */
+.open .flap{
+  transform:rotateX(180deg);
+}
+
+.open .letter{
+  transform:translateY(-120px);
+  opacity:1;
+}
+
+h2{
+  margin-top:0;
+  color:#ff4d6d;
+}
+
+p{
+  font-size:16px;
+  line-height:1.5;
+}
+</style>
+</head>
+
+<body>
+
+
+<div class="envelope" onclick="openLetter()" id="envelope">
+  <div class="base"></div>
+  <div class="flap"></div>
+
+  <div class="letter">
+    <h2>Dear Vaibhav ❤️</h2>
+    <p id="typing"></p>
+  </div>
+</div>
+
+<script>
+function openLetter(){
+  document.getElementById("envelope").classList.add("open");
+  typeMessage();
+  createFloatingText();
+}
+
+let message = "Happy Birthday,Mr.stranger 🥳.I know you’re happy today, and it’s mostly because I am your friend. I was going to give you something amazing for your birthday… but then I remembered you already have me. You’re welcome. I know ye Acah gift 🎁 nhi ha but etna bura bhi nhi h . Ha ye expensive gift nahi hai  😅. i hope you like it 😊🐱..mujhe pta h Tum bhot ache ladke ho pyare ho ha kbhi kbhi time se reply nhi dete but koi nhi 🤗I wish tum hamesha khush raho tumhare jo bhi  dream h wo pure ho tumhe ek achi wife mele 😅 or Ek acche doctor beno.i hope you have a truly wonderful day filled with happiness,laughter,and all things you enjoy the most. you deserve a day that's as great as you are.May this new year of your life bring you lots of success, good health,and amazing opportunities.I hope every day ahead bring you new achievements, memorable moments,and reasons to smile.You deserve all the happiness and love. Always keep smiling ❤️. i purple you 💜";
+
+let i = 0;
+function typeMessage(){
+  if(i < message.length){
+    document.getElementById("typing").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeMessage, 40);
+  }
+}
+function createFloatingText(){
+  setInterval(()=>{
+    let text = document.createElement("div");
+    text.className="floatText";
+    text.innerHTML="Happy Birthday VAIBHAV ❤️🎂";
+    text.style.left=Math.random()*100+"vw";
+    text.style.top="100vh";
+    text.style.color=randomColor();
+    document.body.appendChild(text);
+    setTimeout(()=>{text.remove();},5000);
+  },700);
+}
+
+function randomColor(){
+  let colors=["#ff4d6d","#ff85a1","#f15bb5","#c77dff","#ff99c8"];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+
+
+
+</script>
+
+</body>
+</html>

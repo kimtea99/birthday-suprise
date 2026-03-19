@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #8b5983, #f30a0a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+}
+
+/* Loading Screen */
+#loading {
+  position: absolute;
+  font-size: 20px;
+}
+
+/* Cake */
+.cake {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  display: none;
+}
+
+.layer {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  background: #ff6f91;
+  border-radius: 10px;
+}
+
+.layer:nth-child(1) { top: 100px; }
+.layer:nth-child(2) { top: 60px; background: #ff9671; }
+.layer:nth-child(3) { top: 20px; background: #ffc75f; }
+
+.candle {
+  position: absolute;
+  width: 10px;
+  height: 40px;
+  background: white;
+  top: -20px;
+  left: 95px;
+}
+
+.flame {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: gold;
+  border-radius: 50%;
+  top: -35px;
+  left: 87px;
+  animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(1.2); opacity: 0.7; }
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #ff6f91;
+  font-size: 16px;
+  cursor: pointer;
+}
+button {
+  margin: 10px;
+}
+p {
+  margin: 8px;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">
+Preparing something special for you... 💌<br>
+<span id="percent">0%</span>
+</div>
+
+<h1 id="title" class="hidden">
+Happy Birthday <span id="name">VAIBHAV</span>❤️
+</h1>
+
+<div class="cake" id="cake">
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="candle"></div>
+  <div class="flame" id="flame"></div>
+</div>
+
+<button id="blowBtn" class="hidden" onclick="celebrate()">
+Blow the Candle 🎂
+</button>
+<audio id="music" src="song.mp3"></audio>
+<p  id="wishText" class="hidden">Click Letter</p>
+<button id="surpriseBtn" class="hidden" onclick="openSurprise()">
+    Letter✨
+</button>
+
+
+<script>
+ 
+
+/* Change Name Here */
+document.getElementById("name").innerText = "VAIBHAV";
+
+/* Loading Animation */
+let percent = 0;
+let loadingInterval = setInterval(function() {
+  percent++;
+  document.getElementById("percent").innerText = percent + "%";
+  if (percent >= 100) {
+    clearInterval(loadingInterval);
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("title").classList.remove("hidden");
+    document.getElementById("cake").style.display = "block";
+    document.getElementById("blowBtn").classList.remove("hidden");
+    document.getElementById("wishText").classList.remove("hidden")
+    document.getElementById("blowBtn").classList.remove("hidden");
+    document.getElementById("surpriseBtn").classList.remove("hidden");
+  }
+  
+},30);
+
+function celebrate() {
+   
+  document.getElementById("flame").style.display = "none";
+  document.getElementById("music").play();
+  
+
+  for (let i = 0; i < 50; i++) {
+    let confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor =
+      "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+    confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.body.appendChild(confetti);
+  }
+
+ 
+}
+
+
+function showLetter() {
+  document.getElementById("letter").classList.remove("hidden");
+}
+
+function showSecret() {
+  document.getElementById("secret").classList.remove("hidden");
+}
+function openSurprise() {
+    window.location.href = "surprise.html";
+}
+
+
+</script>
+
+</body>
+</html>
